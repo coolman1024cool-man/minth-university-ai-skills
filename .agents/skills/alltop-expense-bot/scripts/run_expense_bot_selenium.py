@@ -318,22 +318,37 @@ for idx, row in df.iterrows():
         
         # 設置付款類別 (付款資料 val=1, 所得資料 val=2, 付款兼所得 val=3)
         ispay_val = "1"
-        if "付款資料" in pay_type: ispay_val = "1"
-        elif pay_type == "所得資料": ispay_val = "2"
-        elif "付款兼所得" in pay_type or "代墊" in pay_type: ispay_val = "3"
+        if "付款資料" in pay_type and "所得" not in pay_type and "代墊" not in pay_type:
+            ispay_val = "1"
+        elif pay_type == "所得資料":
+            ispay_val = "2"
+        elif "付款兼所得" in pay_type or "代墊" in pay_type or "無所得" in pay_type:
+            # 依學校會計系統規範：教職員代墊款或個人所得皆選取【付款兼所得】(val=3)
+            ispay_val = "3"
         
-        # 設置付款身分 (廠商 val=1, 學生 val=2, 教職員 val=3, 校外 val=4)
+        # 設置付款身分 (廠商 val=1, 學生 val=2, 教職員 val=3, 校外人士 val=4)
         paybus_val = "1" if "廠商" in id_type else ("2" if "學生" in id_type else ("4" if "校外" in id_type else "3"))
         
+        # 設置所得類別 (0-不扣稅所得 val=0, 50-薪資及兼職所得 val=1, 9B-演講費/鐘點費 val=10)
+        salkind_val = "0"
+        if "50" in income_type or "薪資" in income_type or "兼職" in income_type or "工作費" in income_type or "工讀" in income_type:
+            salkind_val = "1"
+        elif "9B" in income_type or "演講" in income_type:
+            salkind_val = "10"
+        elif "9A" in income_type or "執行業務" in income_type:
+            salkind_val = "9"
+        else:
+            salkind_val = "0"
+            
         driver.execute_script(f"""
             if(typeof $.fn.selectpicker !== 'undefined'){{
                 $('#IsPay').selectpicker('val', '{ispay_val}');
-                $('#salkind').selectpicker('val', '0');
                 $('#PayBusKind').selectpicker('val', '{paybus_val}');
+                $('#salkind').selectpicker('val', '{salkind_val}');
             }}
             $('#IsPay').val('{ispay_val}').change();
-            $('#salkind').val('0').change();
             $('#PayBusKind').val('{paybus_val}').change();
+            $('#salkind').val('{salkind_val}').change();
         """)
         time.sleep(1)
 
@@ -359,6 +374,13 @@ for idx, row in df.iterrows():
             $('#salitem').val('{item_name}').change();
             $('#salmoney').val('{amount}').change();
             document.getElementById('money').value = '{amount}';
+            if (document.getElementById('salmoney')) {{
+                document.getElementById('salmoney').value = '{amount}';
+            }}
+            if (typeof $.fn.selectpicker !== 'undefined') {{
+                $('#salkind').selectpicker('val', '{salkind_val}');
+            }}
+            $('#salkind').val('{salkind_val}').change();
         """)
         time.sleep(0.8)
         
@@ -369,8 +391,9 @@ for idx, row in df.iterrows():
             time.sleep(2.5)
             switch_to_main()
 
-        # 全自動打開發票彈窗並填入確認！
-        fill_invoice_modal_natively(inv_type, tax_id, date_str, amount, inv_no, item_name)
+        # 全自動打開發票彈窗並填入確認 (若為發票或免用統一發票)
+        if "發票" in inv_type or "收據" in inv_type:
+            fill_invoice_modal_natively(inv_type, tax_id, date_str, amount, inv_no, item_name)
         
         # 再次確認存檔此筆付款明細並返回清單
         save_btn = driver.find_elements(By.CSS_SELECTOR, "button.save, button.btn-success")
@@ -399,20 +422,26 @@ if att_dir and os.path.exists(att_dir):
         files = glob.glob(os.path.join(att_dir, "*.jpg")) + glob.glob(os.path.join(att_dir, "*.png")) + glob.glob(os.path.join(att_dir, "*.pdf"))
         print(f"  [附件] 在資料夾找到 {len(files)} 個檔案準備上傳...")
         
-        for f_path in files:
-            add_att_btn = driver.find_elements(By.CSS_SELECTOR, "button.new")
+        # 依檔案數量動態點擊【新增】產生足夠的上傳欄位
+        for _ in range(len(files)):
+            add_att_btn = driver.find_elements(By.CSS_SELECTOR, "button.new, button.btn-info")
             if add_att_btn:
                 driver.execute_script("arguments[0].click();", add_att_btn[0])
-                time.sleep(1)
+                time.sleep(0.4)
                 
-            file_inps = driver.find_elements(By.XPATH, "//input[@type='file']")
-            if file_inps:
-                file_inps[-1].send_keys(f_path)
-                print(f"  [上傳] 已掛載附件: {os.path.basename(f_path)}")
-                time.sleep(1)
+        time.sleep(1)
+        file_inps = driver.find_elements(By.CSS_SELECTOR, "input[type='file']")
+        for i, f_path in enumerate(files):
+            if i < len(file_inps):
+                try:
+                    file_inps[i].send_keys(f_path)
+                    print(f"  [上傳] 已掛載附件 ({i+1}/{len(files)}): {os.path.basename(f_path)}")
+                except Exception as e:
+                    print(f"  [失敗] {os.path.basename(f_path)}: {e}")
+                time.sleep(0.5)
                 
         # 點擊確認存檔附件
-        save_att_btn = driver.find_elements(By.CSS_SELECTOR, "button.save")
+        save_att_btn = driver.find_elements(By.CSS_SELECTOR, "button.save, button.btn-success")
         if save_att_btn:
             driver.execute_script("arguments[0].click();", save_att_btn[0])
             time.sleep(3)
