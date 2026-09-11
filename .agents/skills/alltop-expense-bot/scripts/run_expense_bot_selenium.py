@@ -408,7 +408,7 @@ for idx, row in df.iterrows():
 # =========================================================================
 print("\n【階段 3】自動掃描並上傳單據附件...")
 first_row = df.iloc[0]
-att_dir = str(first_row.get('附件資料夾路徑', '')).strip()
+att_dir = str(first_row.get('附件資料夾路徑', '') or first_row.get('資料夾路徑', '')).strip()
 
 if att_dir and os.path.exists(att_dir):
     switch_to_main()
