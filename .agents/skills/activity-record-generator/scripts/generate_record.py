@@ -395,7 +395,8 @@ def generate_activity_record(data, template_path=None, output_path=None):
 
     # 7. 檔名與存檔路徑 (嚴格依全域規範：民國年月日時分 11 碼 + -anti.docx)
     if not output_path:
-        out_dir = r"E:\我的雲端硬碟\Gemini_Spark_產出檔案"
+        spark_dir = r"E:\我的雲端硬碟\Gemini_Spark_產出檔案"
+        out_dir = os.path.join(spark_dir, "07_USR活動記錄表")
         if not os.path.exists(out_dir):
             os.makedirs(out_dir, exist_ok=True)
         ts = get_minguo_timestamp()
