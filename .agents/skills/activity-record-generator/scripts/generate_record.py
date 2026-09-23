@@ -167,7 +167,7 @@ def generate_activity_record(data, template_path=None, output_path=None):
     sp2 = "■ 子計畫2：AI技術應用在農業領域合作" if subproj_id == "2" else "□ 子計畫2：AI技術應用在農業領域合作"
     sp5 = "■ 子計畫5：AI技術應用在碳中和技術領域合作" if subproj_id == "5" else "□ 子計畫5：AI技術應用在碳中和技術領域合作"
     sp3 = "■ 子計畫3：AI及ESG食農教育特色餐飲" if subproj_id == "3" else "□ 子計畫3：AI及ESG食農教育特色餐飲"
-    sph = "■ 校務Hub：" if subproj_id.lower() in ["hub", "校務hub"] else "□ 校務Hub："
+    sph = "■ 校務Hub：" if any(k in subproj_id.lower() for k in ["hub", "校務"]) else "□ 校務Hub："
     
     lines_subproj = [
         f"{sp1}    {sp4}",
