@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "7e855801ac2bb2c5",
+        "id": "217702d2fdf0d9e1",
         "type": "tabs",
         "children": [
           {
-            "id": "3137a565c2fd41ef",
+            "id": "aac1b9c08aa364bc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "AI_Agent_基本功_EP02_核心觀念與初始化設定.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "AI_Agent_基本功_EP02_核心觀念與初始化設定"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "關聯圖檢視"
             }
           }
         ]
@@ -188,8 +184,12 @@
       "bases:建立新的 base": false
     }
   },
-  "active": "3137a565c2fd41ef",
+  "active": "aac1b9c08aa364bc",
   "lastOpenFiles": [
+    "2026-10-08.md",
+    "杜淑美(大美).md",
+    "2026-09-18.md",
+    "AI_Agent_基本功_EP02_核心觀念與初始化設定.md",
     "2026-09-09.md",
     "品質獎評鑑行政事項分辦表.md",
     "Welcome.md",
