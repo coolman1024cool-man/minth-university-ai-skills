@@ -1,4 +1,28 @@
-﻿temp_docx_extract.txt
+# Sensitive credentials & tokens
 credentials.json
 token.json
+temp_docx_extract.txt
+
+# Python cache & virtual environment
 __pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Microsoft Office temporary lock files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Obsidian UI state
+Obsidian_Vault/.obsidian/workspace.json
+Obsidian_Vault/.obsidian/workspace-mobile.json
+
+# Operating System temporary files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.log
