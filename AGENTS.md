@@ -52,7 +52,7 @@
 ### 🌇 收工標準流程 (Finish Session)
 1. **成果沉澱**：重要結論、會議紀錄或分析大綱寫入 Obsidian_Vault/。
 2. **安全防護**：檢查敏感資料（API key、token、個資），確認 .gitignore 正常生效。
-3. **版本控制**：檢查 git status + diff，只 stage 本次相關檔案並 commit。
+3. **版本控制**：檢查 git status + diff，只 stage 本次相關檔案，自動 commit 並 push 至 GitHub。
 4. **Context 重置提醒**：若本次對話較長，主動提醒使用者於下次開工時建立新 Session，以確保最佳 AI 效能。
 
 ---

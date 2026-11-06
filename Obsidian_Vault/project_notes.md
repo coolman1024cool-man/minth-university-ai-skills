@@ -215,3 +215,18 @@
 ### 踩坑記錄
 - （子片段與全片 Concat 時需精確鎖定影格數 CFR 30fps，徹底破除末張多停停留問題）
 - （通訊軟體傳遞拼貼照容易誤存為低解析縮圖，需透過無損像素對齊與重採樣確保 1080p 銳利度）
+
+
+## 2026-11-02 (收工)
+### 已完成
+- 依照 `antigravity-workflow` 與 `AGENTS.md` 規範，落實開工與收工標準作業程序（SOP）。
+- 排查並解決筆電端 GitHub CLI 授權問題：執行 `gh auth setup-git`，將 Git 憑證對接打通至已登入帳號 `coolman1024cool-man`，成功將先前累積之 Commits 全數推送至 GitHub 遠端儲存庫。
+- 依指示將「收工自動 Commit 並 Push 至 GitHub」固化寫入 `AGENTS.md` 與 `05-workflow/SKILL.md`。
+- 完成 2026-10-30 與 2026-11-02 跨裝置同步驗證與工作流標準化之 Obsidian 成果沉澱。
+
+### 下一步計畫
+- 下次開工建議開啟新 Session，保持 AI 最佳運算效能。
+- 推進 115 下半年「阿基師茶宴・菜品研討」之後續活動紀錄表、影音與 USR 智慧行政。
+
+### 踩坑記錄
+- （Windows 筆電背景執行 git push 若未配置 credential helper 會卡在認證等待，執行 `gh auth setup-git` 可一勞永逸打通憑證）
