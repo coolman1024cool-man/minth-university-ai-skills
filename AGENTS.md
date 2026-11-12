@@ -27,6 +27,7 @@
 - **global-context-strategist**：全球局勢與地緣政治戰略顧問。
 - **religious-studies-researcher**：歷史與宗教文物深度研究考究。
 - **energy-expert**：全球能源發展與地質環境分析。
+- **lida-inventory-checker**：立達鋼鐵專屬庫存盤盈虧自動核算機器人（自動比對系統庫存與現場盤點量、自動填入 S 欄盤點數與 T 欄公式、淺黃色高亮差異、極簡雙分頁 Excel 輸出）。
 
 ---
 
