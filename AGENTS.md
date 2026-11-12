@@ -15,6 +15,7 @@
   - 經費報表符合國家公文規範（細黑線邊框、純黑白、數字欄位絕對不折行、A4 直式）。
 
 ### 2. 專案專屬技能庫 (Skills)
+- **usr-web-curator**：敏實科大 USR 成果網站與多媒體數位策展機器人（跨資料夾檢索分類、排除簽到單/食材箱、720p 影音輕量轉碼、方案 A 播放清單、公文檢視器與 Firebase 熱部署一條龍）。
 - **usr-budget-report-formatter**：會計系統 PDF 預算控制表轉 Word 統計表工具。
 - **minth-poster-generator**：敏實科技大學專屬海報生成器 (支援成果與講座模式，產出 Canva 可編輯 PPTX 檔)。
 - **meeting-record-generator**：專屬會議紀錄生成器，自動萃取會議重點並排版匯出國家公文標準格式 Word 檔。
